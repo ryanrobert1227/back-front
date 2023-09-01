@@ -3,7 +3,8 @@ import UserForm from "./assets/components/useForm";
 import UserList from "./assets/components/userList";
 
 function App() {
-  const url = "";
+  const url = "http://localhost:3000/createUser"; // Substitua pela URL correta da sua API
+
   const [people, setPeople] = useState([]);
 
  // pegando dados

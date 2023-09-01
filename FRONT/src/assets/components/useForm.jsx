@@ -1,40 +1,48 @@
-import React, { useState } from "react";
+// Em UserForm.js (ou onde você definiu o componente UserForm)
+import React, { useState } from 'react';
 
 function UserForm({ onSubmit }) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [formData, setFormData] = useState({
+    nome: '',
+    email: '',
+    idade: 0,
+  });
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    onSubmit({ name, email });
-    setName("");
-    setEmail("");
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit(formData); // Envie os dados para a função onSubmit definida no App.js
   };
 
   return (
-    <div className="form">
-      <form onSubmit={handleSubmit}>
-        <label>
-          Nome:
-          <input
-            type="text"
-            value={name}
-            placeholder="Nome"
-            onChange={(e) => setName(e.target.value)}
-          />
-        </label>
-        <label>
-          E-mail:
-          <input
-            type="text"
-            value={email}
-            placeholder="E-mail"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
-        <button type="submit">Adicionar</button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        name="nome"
+        placeholder="Nome"
+        value={formData.nome}
+        onChange={handleChange}
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="Email"
+        value={formData.email}
+        onChange={handleChange}
+      />
+      <input
+        type="number"
+        name="idade"
+        placeholder="Idade"
+        value={formData.idade}
+        onChange={handleChange}
+      />
+      <button type="submit">Criar Usuário</button>
+    </form>
   );
 }
 
