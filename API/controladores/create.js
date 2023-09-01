@@ -1,10 +1,11 @@
+import { v4 as uuidv4 } from "uuid";
 
-export async function createUser(req, res) {
+export function createUser(req, res) {
   try {
     const { nome, email, idade } = req.body;
 
     const novoUsuario = {
-      id: Math.random().toString(36).substr(2, 9),
+      id: uuidv4(),
       nome,
       email,
       idade,
